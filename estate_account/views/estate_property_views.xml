@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Inherit the estate property form view to inject the Invoices smart button.
+        We target the existing empty button_box div defined in the base form view.
+    -->
+    <record id="estate_property_view_form_account_inherited" model="ir.ui.view">
+        <field name="name">estate.property.view.form.account.inherited</field>
+        <field name="model">estate.property</field>
+        <field name="inherit_id" ref="estate.estate_property_view_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    class="oe_stat_button"
+                    type="object"
+                    name="action_view_invoices"
+                    icon="fa-file-text-o">
+                    <field
+                        string="Invoices"
+                        name="invoice_count"
+                        widget="statinfo"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+</odoo>
