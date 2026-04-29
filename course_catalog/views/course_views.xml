@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- =====================================================================
+         COURSE LIST VIEW
+    ===================================================================== -->
+    <record id="course_course_view_list" model="ir.ui.view">
+        <field name="name">course.course.view.list</field>
+        <field name="model">course.course</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="price"/>
+                <field name="enrollment_count"/>
+                <field name="total_revenue"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- =====================================================================
+         COURSE FORM VIEW
+    ===================================================================== -->
+    <record id="course_course_view_form" model="ir.ui.view">
+        <field name="name">course.course.view.form</field>
+        <field name="model">course.course</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Course Title"/></h1>
+                    </div>
+                    <group>
+                        <group string="Pricing">
+                            <field name="price"/>
+                            <field name="total_revenue"/>
+                        </group>
+                        <group string="Statistics">
+                            <field name="enrollment_count"/>
+                        </group>
+                    </group>
+                    <!--
+                        BUG B4 FIX:
+                        The original form had <field name="student_name"/> here,
+                        directly on the course form. But student_name is a field
+                        on course.enrollment, not course.course.
+                        Odoo raised a ViewError: "field student_name not found".
+                        Removed it here. student_name appears correctly inside
+                        the enrollment_ids inline tree below.
+                    -->
+                    <notebook>
+                        <page string="Enrollments">
+                            <field name="enrollment_ids">
+                                <tree editable="bottom">
+                                    <field name="student_name"/>
+                                    <field name="date_enrolled"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- =====================================================================
+         SEARCH VIEW
+    ===================================================================== -->
+    <record id="course_course_view_search" model="ir.ui.view">
+        <field name="name">course.course.view.search</field>
+        <field name="model">course.course</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- =====================================================================
+         WINDOW ACTION + MENU
+    ===================================================================== -->
+    <record id="course_course_action" model="ir.actions.act_window">
+        <field name="name">Courses</field>
+        <field name="res_model">course.course</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="course_catalog_menu_root"
+        name="Course Catalog"
+        sequence="20"/>
+
+    <menuitem
+        id="course_catalog_menu_courses"
+        name="Courses"
+        parent="course_catalog_menu_root"
+        action="course_course_action"
+        sequence="10"/>
+
+</odoo>
