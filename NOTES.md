@@ -7,8 +7,8 @@
 | Foundation (`estate/`) | ~1.5h |
 | Task A (`estate_account/`) | ~1.5h |
 | Task B (`course_catalog/`) | ~50min |
-| Documentation | ~10min |
-| **Total** | **~4h** |
+| Documentation | ~15min |
+| **Total** | **~4h 5min** |
 
 ---
 
