@@ -15,7 +15,7 @@ class Enrollment(models.Model):
         required=True,
         string="Student",
     )
-    amount = fields.Monetary(currency_field="currency_id")
+    amount = fields.Monetary(currency_field="currency_id", required=True)
     currency_id = fields.Many2one(
         "res.currency",
         related="course_id.currency_id",
